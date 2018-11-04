@@ -1,0 +1,20 @@
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #dcdcdc4f;
+}
+.nav-pills>li.active>a:visited .nav-pills>li.active>a:link{
+    color: white;
+}
+li>a{
+    color: white;
+}
+/*li{*/
+    /*color: #FFA500;*/
+    /*color: #c52817;*/
+    /*color: #dabb37;*/
+    /*color: #118630;*/
+    /*color: #dbe080;*/
+    /*color: #d298b4;*/
+    /*color: #292e4b;*/
+    /*color: #4AD63A;*/
+/*}*/

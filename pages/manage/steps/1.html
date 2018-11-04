@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+    <title>Neovis.js Simple Example</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        html, body {
+            font: 16pt arial;
+        }
+
+        #viz {
+            height: 100vh;
+            border: 0px solid lightgray;
+            font: 22pt arial;
+            /*background-color: rgb(242,242,242);*/
+        }
+
+        #find {
+            height: 5vh;
+            border: 0px solid lightgray;
+            /*font: 22pt arial;*/
+            background-color: gray;
+        }
+
+        ::-webkit-scrollbar {
+            height: 0px;
+            width: 0px;
+        }
+
+        /*//滚动槽*/
+        ::-webkit-scrollbar-track {
+            border-radius: 1px;
+        }
+
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            border-radius: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:window-inactive {
+            background: rgba(255, 0, 0, 0.4);
+        }
+
+        hr {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            border: 1px solid gray;
+        }
+
+    </style>
+    <link href="../../../module/bootstrap3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="1.css" rel="stylesheet">
+
+    <script type="text/javascript" src="./1_1/neovis.js"></script>
+
+    <script src="../../../module/assets/js/vendor/jquery.min.js"></script>
+
+    <script src="../../../module/bootstrap3.3/js/bootstrap.min.js"></script>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            draw()
+        })
+
+        var viz;
+
+        function draw() {
+            var config = {
+                arrows:true,
+                container_id: "viz",
+                server_url: "bolt://127.0.0.1:7687",
+                server_user: "neo4j",
+                server_password: "root",
+                labels: {
+                    "URBAN": {
+                        "caption": "name",
+                        "size": 20,
+                        "color": "#ff0000",
+                        // font: {
+                        //     size: 26,
+                        //     strokeWidth: 7
+                        // },
+                        // "community": "community"
+                        //"sizeCypher": "MATCH (n) WHERE id(n) = {id} MATCH (n)-[r]-() RETURN sum(r.weight) AS c"
+                    },
+                    "CITY": {
+                        "caption": "name",
+                        "size": 30,
+                    },
+                    "PROVINCE": {
+                        "caption": "name",
+                        "icon": "./icons/person.png",
+                        "size": 40,
+                    },
+                    "PERSON": {
+                        "caption": "name",
+                        "icon": "./icons/person.png",
+                        "size": 30,
+                    },
+                    "COMPANY": {
+                        "caption": "name",
+                        "size": 40,
+                    },
+                    "YEAR": {
+                        "caption": "name",
+                        "size": 10,
+                    },
+                    "MONTH": {
+                        "caption": "name",
+                        "size": 10,
+                    },
+                    "DAY": {
+                        "caption": "name",
+                        "size": 10,
+                    },
+                    "ZB": {
+                        "caption": "name",
+                        "size": 10,
+                    },
+                    "FX": {
+                        "caption": "name",
+                        "size": 10,
+
+                    },
+                },
+                initial_cypher: "MATCH (n)-[r]->(m) RETURN n,r,m"
+            };
+
+            viz = new NeoVis.default(config);
+            // viz =new NeoVis.debounce(config)
+            viz.render();
+
+        }
+    </script>
+</head>
+
+
+<body>
+<div  style="padding: 0px;margin: 0px">
+    <div class="row" style="margin-left: 0px;margin-right: 5px">
+        <div  class="col-md-10"  style="padding: 0px">
+            <div style="position: absolute;height: 10vh;width: 10vh;background-color: white" >
+                <!--<canvas>-->
+                    <svg width="100%" height="100%" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60 10  L10 10 L10 60 M 40 20 L 20 20 L 20 40" style="stroke:black;stroke-width:3px;stroke-dasharray: 2" fill="white"></path></svg>
+                <!--</canvas>-->
+            </div>
+            <div id="viz" class="row"></div>
+            <!--<div id="find" class="find"></div>-->
+        </div>
+        <div class="col-md-2 " style="padding-top: 10px;padding-left:4px;padding-right: 4px;background-color: #737373;height: 100vh">
+            <ul class="nav nav-pills  nav-justified bg-light" >
+                <li class="active nav-item " ><a data-toggle="tab" href="#menu1" style="color: white;">查询</a></li>
+                <li class="nav-item"> <a data-toggle="tab" href="#menu2" id="static">统计</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                    <hr style="margin-top: 0px;margin-bottom: 0px">
+                    <input type="text" id="cypher" placeholder="输入查询内容" style="width: 100%" class="form-control">
+                    <hr style="margin-top: 0px;margin-bottom: 0px">
+                    <input type="submit" value="提交" id="reload" style="background-color: #e2e1e1" class="form-control">
+                </div>
+                <div id="menu2" class="tab-pane fade" style="margin-top: 5px">
+
+                    <!--<hr style="margin-top: 0px;margin-bottom: 0px">-->
+
+                    <button class="btn btn-block entityBtn1 entityBtn3"><img src="../../../module/open-iconic-master/png/caret-right.png">&nbsp;实体信息</button>
+                    <button class="btn btn-block entityBtn2 "> <img src="../../../module/open-iconic-master/png/caret-bottom.png">&nbsp;实体信息</button>
+                    <!--<hr style="margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px">-->
+                    <div style="height: 20vh;overflow:scroll;margin-top: 10px ;" class="entityBtn2 entityBtn3" >
+                        <div id="dataArea">
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px"></div>
+                    <!--<hr style="margin-top: 0px;margin-bottom: 0px;color: #0f0f0f">-->
+                    <button class="btn btn-block relationBtn1 relationBtn3"><img src="../../../module/open-iconic-master/png/caret-right.png">&nbsp;属性信息</button>
+                    <button class="btn btn-block relationBtn2"><img src="../../../module/open-iconic-master/png/caret-bottom.png">&nbsp;属性信息</button>
+                    <!--<hr style="margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px;color: #0f0f0f">-->
+                    <div style="height: 30vh;overflow:scroll;" class="relationBtn2 relationBtn3"  >
+                        <div id="dataArea2">
+                        <!--<button class="btn btn-xs">市区</button>-->
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../../../module/assets/js/vendor/jquery.min.js"></script>
+<script src="1_1/main.js"></script>
+
+<script>
+
+
+    $(".entityBtn2").css("display","none");
+
+    $(".entityBtn1").click(function () {
+        $(".entityBtn2").css("display","block");
+        $(".entityBtn1").css("display","none");
+    })
+    $(".entityBtn2").click(function () {
+        $(".entityBtn3").css("display","block");
+        $(".entityBtn2").css("display","none");
+    })
+    $(".relationBtn2").css("display","none");
+
+    $(".relationBtn1").click(function () {
+        $(".relationBtn2").css("display","block");
+        $(".relationBtn1").css("display","none");
+    })
+    $(".relationBtn2").click(function () {
+        $(".relationBtn3").css("display","block");
+        $(".relationBtn2").css("display","none");
+    })
+
+    $("#reload").click(function () {
+
+        var str = $("#cypher").val();
+
+
+        var cypher = "MATCH(n{name:" + "'" + str + "'" + "})-[r]->(m) return n,m,r;"
+        // console.log("cypher ===="+cypher)
+        if (cypher.length > 3) {
+            viz.renderWithCypher(cypher);
+        } else {
+            // console.log("reload");
+            viz.reload();
+        }
+    });
+
+
+    $("#stabilize").click(function () {
+        viz.stabilize();
+    })
+
+    function labelClick(target) {
+        var str1 = $(target).text();
+        // console.log("run here"+str)
+        var strs = str1.split(" ")
+        var name = strs[0];
+
+        var cypher = "MATCH (n:"+name+") RETURN n"
+        console.log("cypher ===="+cypher)
+        if (cypher.length > 3) {
+            viz.renderWithCypher(cypher);
+        } else {
+            // console.log("reload");
+            viz.reload();
+        }
+    };
+    function relationshipClick(target) {
+        var str1 = $(target).text();
+        // console.log("run here"+str)
+        var strs = str1.split(" ")
+        var name = strs[0];
+
+        var cypher = "MATCH p=()-[r:"+name+"]->() RETURN p"
+        console.log("cypher ===="+cypher)
+        if (cypher.length > 3) {
+            viz.renderWithCypher(cypher);
+        } else {
+            // console.log("reload");
+            viz.reload();
+        }
+    };
+
+
+    $("#static").click(function () {
+        var driver = neo4j.v1.driver("bolt://127.0.0.1:7687", neo4j.v1.auth.basic("neo4j", "root"));
+        var session = driver.session();
+        var cypher_str = "MATCH (n) RETURN DISTINCT LABELS(n) as label, COUNT(n) as count";
+        var cypher_str1 = "MATCH ()-[r]->() RETURN distinct type(r) as type, COUNT(r) as count;";
+
+
+        function print_str(record) {
+            return "<button class='btn btn-xs'  style='margin: 2px'><a onclick='labelClick(this)'>"+record.get('label')+"</a>&nbsp;&nbsp;<font style='color: red'>"+record.get('count')+"</font></button>";
+        }
+        function print_str1(record) {
+            return "<button class='btn btn-xs'  style='margin: 2px'><a onclick='relationshipClick(this)'>"+record.get('type')+"</a>&nbsp;&nbsp;<font style='color: red'>"+record.get('count')+"</font></button>";
+        }
+
+        getData(cypher_str, print_str);
+
+        function getData(cypher_str, print_str) {
+            $("#dataArea").empty()
+            $("#dataArea2").empty()
+            session
+            // .run('MERGE (alice:Person {name : {nameParam} }) RETURN alice.name AS name', {nameParam: 'Alice'})
+                .run(cypher_str)
+                // .run("match(p1:PERSON) return p1.name as name;")
+                .subscribe({
+                    onNext: function (record) {
+                        console.log(record.get('label'));
+                        $("#dataArea").append(print_str(record))
+                    },
+                    onCompleted: function () {
+                        session.close();
+                    },
+                    onError: function (error) {
+                        console.log(error);
+                    }
+                });
+            session .run(cypher_str1)
+                .subscribe({
+                    onNext: function (record) {
+                        $("#dataArea2").append(print_str1(record))
+                    },
+                    onCompleted: function () {
+                        session.close();
+                    },
+                    onError: function (error) {
+                        console.log(error);
+                    }
+                });
+        }
+        //
+    })
+    driver.close();
+
+</script>
+<script src="https://unpkg.com/neo4j-driver"></script>
+<!-- unpkg CDN minified for production use, version X.Y.Z -->
+<script src="https://unpkg.com/neo4j-driver@X.Y.Z/lib/browser/neo4j-web.min.js"></script>
+
+</html>

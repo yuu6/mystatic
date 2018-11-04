@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>step</title>
+    <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../steps/jquery-1.10.2.min.js"></script>
+    <script src="../../../module/assets/js/vendor/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+
+    <script src="../../../module/dist/js/bootstrap.js"></script>
+    <script src="../../../module/assets/js/vendor/jquery-slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+    <!--<script>window.jQuery || document.write('<script src="../../module/assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
+    <!--<script src="../../../module/assets/js/vendor/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
+    <script src="../../../module/dist/js/bootstrap.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../../module/assets/js/ie10-viewport-bug-workaround.js"></script>
+</head>
+<body >
+<!--<div class="container">-->
+<!--<div class="row container">-->
+    <div class="col-lg-3" style="overflow: hidden;position: fixed" id="myStep">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width: 90%;height:90vh">
+            <desc>Example script01 - invoke an ECMAScript function from an onclick event
+            </desc>
+
+            <!--<defs>  -->
+                <!--   <marker id="markerArrow" markerWidth="8" markerHeight="8" refx="2" refy="5" orient="auto">  -->
+                    <!--       <path d="M2,3 L2,7 L4,5 L2,3" style="fill: rgb(72, 68, 157);" />  -->
+                    <!--   </marker>  -->
+            <!--</defs>  -->
+
+            <line x1="50%" y1="10%" x2="50%" y2="10%" style="stroke:white;"  id="1" stroke-width="4" />
+            <g>
+                <circle cx="50%" cy="20%" r="5%"  fill="#57689D" id="c1"></circle>
+                <text x="50%" y="19%" stroke="white" stroke-width="2px" dy=".3em" text-anchor="middle"
+                      onclick="circle_click(evt)"
+                      alignment-baseline="middle" font-size="30" fill="white"  id="t1">1</text>
+                <!--<rect x ="30%" y="17%" width="50%" height="6%" fill="#DADF80" id="r1"></rect>-->
+                <!--<text x ="50%" y="50%" color="blue" stroke-width="2px" dy=".3em" text-anchor="start"  >实体抽取</text>-->
+            </g>
+
+            <line x1="50%" y1="25%" x2="50%" y2="45%" style="stroke:rgb(72, 68, 157);" stroke-width="4"  id ="2"/>
+            <g>
+                <circle cx="50%" cy="50%" r="5%"  fill="#57689D"  id="c2"></circle>
+                <text x="50%" y="49%" stroke="white" stroke-width="2px" dy=".3em" text-anchor="middle"
+                      onclick="circle_click(evt)"
+                      alignment-baseline="middle" font-size="30" fill="white"  id="t2">2</text>
+            </g>
+            <!--<line x1="50%" y1="55%" x2="50%" y2="75%" style="stroke:rgb(72, 68, 157)" stroke-width="4" id ="3"/>-->
+            <!--<g>-->
+                <!--<circle cx="50%" cy="80%" r="5%" fill="#57689D"  id="c3"></circle>-->
+                <!--<text x="50%" y="79%" stroke="white" stroke-width="2px" dy=".3em" text-anchor="middle"-->
+                      <!--onclick="circle_click(evt)"-->
+                      <!--alignment-baseline="middle" font-size="30" fill="white" id="t3">3</text>-->
+            <!--</g>-->
+            <!--<line x1="50%" y1="75%" x2="50%" y2="85%" style="stroke:rgb(72, 68, 157);" stroke-width="5"  id ="4"/>-->
+
+            <script type="application/ecmascript"> <![CDATA[
+            function circle_click(evt) {
+                var circle = evt.target;
+                // var currentRadius = circle.getAttribute("r");
+                var currentRadius = circle.firstChild.nodeValue;
+                 switch (currentRadius.toString()){
+                     case "1":
+                         location.href= "#top";
+                         changeS(currentRadius)
+                         break
+                     case "2":
+                         location.href= "#middle";
+                         changeS(currentRadius)
+                         break
+                     // case "3":
+                     //     location.href= "#bottom";
+                     //     changeS(currentRadius)
+                     //     break
+                 }
+                console.log(currentRadius);
+                // location.href= "#bottom";
+            }
+            function changeS(currentRadius) {
+                for(var i=1;i<=3;i++) {
+                    if(i <currentRadius){
+                        var _obj = document.getElementById(i);
+                        _obj.setAttribute('style', "stroke:"+"grey");
+                        var id2 = "c"+i.toString()
+                        var c = document.getElementById(id2);
+                        c.setAttribute('fill', "grey");
+                        c.setAttribute('r', "5%");
+                        var id3 = "t"+i.toString()
+                        var t = document.getElementById(id3);
+                        t.setAttribute('font-size', "30");
+                    }else if(i == currentRadius){
+                        var _obj = document.getElementById(i);
+                        _obj.setAttribute('style', "stroke:"+"grey");
+                        var id2 = "c"+i.toString()
+                        var c = document.getElementById(id2);
+                        c.setAttribute('fill', "grey");
+                        c.setAttribute('r', "6%");
+                        var id3 = "t"+i.toString()
+                        var t = document.getElementById(id3);
+                        t.setAttribute('font-size', "40");
+                    }
+                    else {
+                        var _obj = document.getElementById(i);
+                        _obj.setAttribute('style', "stroke:" + "rgb(72, 68, 157);");
+                        var id2 = "c"+i.toString()
+                        var c = document.getElementById(id2);
+                        c.setAttribute('fill', "#57689D");
+                        c.setAttribute('r', "5%");
+                        var id3 = "t"+i.toString()
+                        var t = document.getElementById(id3);
+                        t.setAttribute('font-size', "30");
+                    }
+                }
+            }
+
+            ]]>
+
+
+
+            </script>
+        </svg>
+    </div>
+    <div class="col-lg-9 offset-3" style="overflow-y:hidden;padding-top: 20px">
+
+
+
+        <!--<hr/>-->
+        <div style="padding-left: 20px;" >
+        <form class="form-inline" style="">
+            <h2>知识融合</h2>
+            <!--<select class="form-control offset-4" style="size: 20px">-->
+                <!--<option value="0" selected>==选择数据来源==</option>-->
+                <!--<option>百度词条</option>-->
+                <!--<option>知网</option>-->
+                <!--<option>新闻</option>-->
+            <!--</select>-->
+            <!--<select class="form-control" style="size: 20px">-->
+                <!--<option value="0" selected>==选择领域==</option>-->
+
+                <!--<option>纳税指标</option>-->
+                <!--<option>识别算法</option>-->
+                <!--<option>公司业务</option>-->
+            <!--</select>-->
+            <!--<button class=" btn-block btn col-1" >提交</button>-->
+        </form>
+
+        <div style=" padding-top: 20px" id="top">
+            <div class="card">
+                <div class="card-header">1.实体链接</div>
+                <div  class="row card-block" >
+                    <iframe src="step1.html" width="100%" height="500px" style="border:0px"></iframe>
+
+                </div>
+            </div>
+        </div>
+
+        <div style=" padding-top: 20px" id="middle">
+            <div class="card">
+                <div class="card-header">2.知识合并</div>
+                <div  class="row card-block" >
+                    <div class="col-3">
+                        关系图
+                    </div>
+                    <div class="col-9" style="background-color: #0f0f0f">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div style=" padding-top: 20px" id="bottom">-->
+            <!--<div class="card">-->
+                <!--<div class="card-header">3.主题属性抽取</div>-->
+                <!--<div  class="row card-block" >-->
+                    <!--<div class="col-3">-->
+                        <!--展示每个主题的属性-->
+                    <!--</div>-->
+                    <!--<div class="col-9" style="background-color: #0f0f0f">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div style=" padding-top: 50px" id="top">-->
+            <!--<div class="card">-->
+                <!--<div class="card-header">知识关联抽取</div>-->
+                <!--<div class="card-body" style="margin-top: 10px">-->
+                    <!--<form class="form-inline ">-->
+                        <!--<select class="form-control col-2">-->
+                            <!--<option>文件1</option>-->
+                            <!--<option>文件2</option>-->
+                            <!--<option>文件3</option>-->
+                        <!--</select>-->
+                        <!--<button class="btn btn-primary col-2 offset-1" type="submit">提交</button>-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div style=" padding-top: 50px" id="top">-->
+            <!--<div class="card">-->
+                <!--<div class="card-header">知识属性抽取</div>-->
+                <!--<div class="card-body" style="margin-top: 10px">-->
+                    <!--<form class="form-inline ">-->
+                        <!--<select class="form-control col-2">-->
+                            <!--<option>文件1</option>-->
+                            <!--<option>文件2</option>-->
+                            <!--<option>文件3</option>-->
+                        <!--</select>-->
+                        <!--<button class="btn btn-primary col-2 offset-1" type="submit">提交</button>-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    </div>
+    </div>
+
+<!--</div>-->
+</body>
+
+<!--<script type="text/javascript" src="./myStep.js"></script>-->
+<!--<script type="text/javascript">-->
+    <!--myStep.verticalStep(start,end,length);-->
+<!--</script>-->
+
+<script>
+    // $.getJSON("json/",function(data)
+</script>
+
+
+</html>

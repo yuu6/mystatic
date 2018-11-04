@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>step1</title>
+    <script src="../../../module/assets/js/vendor/jquery.min.js"></script>
+    <script src="../../../module/assets/js/vendor/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+    <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../module/dist/js/bootstrap.js"></script>
+    <!--<script src="../../../module/assets/js/vendor/jquery.min.js"></script>-->
+    <script src="./echarts/echarts.min.js"></script>
+    <script src="./echarts/echarts-wordcloud.min.js"></script>
+
+
+
+</head>
+<body>
+<div class="row" style="width: 98%">
+
+</div>
+</body>
+<script>
+    var myChart = echarts.init(document.getElementById('echarts'));
+
+
+
+
+    //myChart.setOption(option);
+    myChart.on('click', function (params) {
+        //alert((params.name));
+        window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+
+    });
+    myChart.setOption(option)
+
+
+</script>
+</html>

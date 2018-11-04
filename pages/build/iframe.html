@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<style>
+
+    .link {
+        stroke: #aaa;
+    }
+
+    .node text {
+        stroke:#333;
+        cursos:pointer;
+    }
+
+    .node circle{
+        stroke:#fff;
+        stroke-width:0px;
+        fill:#555;
+    }
+
+      /* 设置滚动条的样式 */
+     ::-webkit-scrollbar {
+        height: 1px;
+        width: 0px;
+    }
+
+    /* 滚动槽 */
+    ::-webkit-scrollbar-track {
+        border-radius: 1px;
+    }
+
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1px;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(255, 0, 0, 0.4);
+    }
+
+
+
+</style>
+<body>
+
+
+<script>
+
+    var width =  document.body.clientWidth,
+        height = 300;
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    svg.append('text').attr({
+        x: width*0.25,
+        y: height*0.47
+    }).style({
+        fill: d3.rgb(72,68,157),
+        'font-size': '50px'
+    }).text('KNOWLEDGE GRAPH');
+
+    var force = d3.layout.force()
+        .gravity(.015)
+        .distance(100)
+        .charge(-100)
+        .size([width, height]);
+
+
+
+    d3.json("graphFile.json", function(json) {
+
+        force
+            .nodes(json.nodes)
+            .links(json.links)
+            .start();
+
+        var link = svg.selectAll(".link")
+            .data(json.links)
+            .enter().append("line")
+            .attr("class", "link")
+            .style("stroke-width", function(d) { return Math.sqrt(d.weight); })
+            .style("stroke",d3.rgb(176, 182, 186));
+
+        var node = svg.selectAll(".node")
+            .data(json.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .call(force.drag);
+
+        node.append("circle")
+            .attr("r","5")
+            .style("fill",d3.rgb(176, 182, 186));
+        //
+        // node.append("text")
+        //     .attr("dx", 12)
+        //     .attr("dy", ".35em")
+        //     .style("fill",d3.rgb(176, 182, 186))
+        //     .text(function(d) { return d.name });
+
+        force.on("tick", function() {
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        });
+    });
+
+</script>
