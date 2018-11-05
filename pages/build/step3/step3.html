@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>step1</title>
+    <script src="../../../module/assets/js/vendor/jquery.min.js"></script>
+    <script src="../../../module/assets/js/vendor/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+    <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../module/dist/js/bootstrap.js"></script>
+    <!--<script src="../../../module/assets/js/vendor/jquery.min.js"></script>-->
+    <script src="./echarts/echarts.min.js"></script>
+    <script src="./echarts/echarts-wordcloud.min.js"></script>
+
+
+
+</head>
+<body>
+<div >
+    对三元关系进行标注，保留置信度较高的三元关系，舍弃置信度较低的，有效确保知识的质量。
+    <div id="echarts" style="height: 450px;width: 95%" ></div>
+</div>
+</body>
+<script>
+    var myChart = echarts.init(document.getElementById('echarts'));
+
+
+    myChart.showLoading();
+
+    $.get('data/list.json', function (obama_budget_2012) {
+        myChart.hideLoading();
+
+        option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow',
+                    label: {
+                        show: true
+                    }
+                }
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            legend: {
+                data:['Growth', 'Budget 2011', 'Budget 2012'],
+                itemGap: 5
+            },
+            grid: {
+                top: '12%',
+                left: '1%',
+                right: '10%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type : 'category',
+                    data : obama_budget_2012.names
+                }
+            ],
+            yAxis: [
+                {
+                    type : 'value',
+                    name : 'Budget (million USD)',
+                    axisLabel: {
+                        formatter: function (a) {
+                            a = +a;
+                            return isFinite(a)
+                                ? echarts.format.addCommas(+a / 1000)
+                                : '';
+                        }
+                    }
+                }
+            ],
+            dataZoom: [
+                {
+                    show: true,
+                    start: 94,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    start: 94,
+                    end: 100
+                },
+                {
+                    show: true,
+                    yAxisIndex: 0,
+                    filterMode: 'empty',
+                    width: 30,
+                    height: '80%',
+                    showDataShadow: false,
+                    left: '93%'
+                }
+            ],
+            series : [
+                {
+                    name: 'Budget 2011',
+                    type: 'bar',
+                    data: obama_budget_2012.budget2011List
+                },
+                {
+                    name: 'Budget 2012',
+                    type: 'bar',
+                    data: obama_budget_2012.budget2012List
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+
+    });
+
+
+
+
+</script>
+</html>
