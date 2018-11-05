@@ -25,12 +25,12 @@
     var myChart = echarts.init(document.getElementById('echarts'));
 
     myChart.showLoading();
-    $.get('data/bower.json', function (data) {
+    $.get('data/tax.json', function (data) {
         myChart.hideLoading();
 
-        echarts.util.each(data.children, function (datum, index) {
-            index % 2 === 0 && (datum.collapsed = true);
-        });
+        // echarts.util.each(data.children, function (datum, index) {
+        //     index % 2 === 0 && (datum.collapsed = true);
+        // });
 
         myChart.setOption(option = {
             tooltip: {
@@ -48,14 +48,14 @@
                     bottom: '1%',
                     right: '20%',
 
-                    symbolSize: 7,
+                    symbolSize: 14,
 
                     label: {
                         normal: {
                             position: 'left',
                             verticalAlign: 'middle',
                             align: 'right',
-                            fontSize: 9
+                            fontSize: 18
                         }
                     },
 
@@ -69,25 +69,14 @@
                         }
                     },
 
-                    expandAndCollapse: true,
+                    expandAndCollapse: false,
                     animationDuration: 550,
-                    animationDurationUpdate: 750
+                    animationDurationUpdate: 750,
+                    initialTreeDepth:5
                 }
             ]
         });
     });
-
-
-    //myChart.setOption(option);
-    // myChart.on('click', function (params) {
-    //     //alert((params.name));
-    //     window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
-    //
-    // });
-    // myChart.setOption(option)
-
-
-
 
 </script>
 </html>
