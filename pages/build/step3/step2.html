@@ -17,8 +17,10 @@
 </head>
 <body>
 <div >
-    <!--<div style="padding: 0rem 1.25rem">本体上下位关系抽取<div>-->
-    <div id="echarts" style="height: 500px;width: 100%" ></div>
+    <div style="padding: 0rem 1.25rem">
+        <span>实体上下位关系抽取是用于确定概念之间的隶属（IsA）关系，这种关系也称为上下位关系。
+            </span><div>
+    <div id="echarts" style="height: 450px;width: 100%;padding-top: 40px" ></div>
 </div>
 </body>
 <script>
@@ -27,7 +29,7 @@
     myChart.showLoading();
     $.get('data/tax.json', function (data) {
         myChart.hideLoading();
-
+        //
         // echarts.util.each(data.children, function (datum, index) {
         //     index % 2 === 0 && (datum.collapsed = true);
         // });
@@ -55,7 +57,7 @@
                             position: 'left',
                             verticalAlign: 'middle',
                             align: 'right',
-                            fontSize: 18
+                            fontSize: 12
                         }
                     },
 
@@ -69,7 +71,7 @@
                         }
                     },
 
-                    expandAndCollapse: false,
+                    expandAndCollapse: true,
                     animationDuration: 550,
                     animationDurationUpdate: 750,
                     initialTreeDepth:5

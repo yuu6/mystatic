@@ -130,6 +130,10 @@
                         "size": 10,
 
                     },
+                    "TAXNAME":{
+                        "caption":"name",
+                        "size":10,
+                    }
                 },
                 initial_cypher: "MATCH (n)-[r]->(m) RETURN n,r,m"
             };
@@ -147,17 +151,22 @@
 <div  style="padding: 0px;margin: 0px">
     <div class="row" style="margin-left: 0px;margin-right: 5px">
         <div  class="col-md-10"  style="padding: 0px">
-            <div style="position: absolute;height: 10vh;width: 10vh;background-color: white" >
+            <div style="position: absolute;height: 10vh;width: 10vh;background-color: white" id ="mainshow">
                 <!--<canvas>-->
-                    <svg width="100%" height="100%" version="1.1"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M60 10  L10 10 L10 60 M 40 20 L 20 20 L 20 40" style="stroke:black;stroke-width:3px;stroke-dasharray: 2" fill="white"></path></svg>
+                    <!--<svg width="100%" height="100%" version="1.1"-->
+                         <!--xmlns="http://www.w3.org/2000/svg">-->
+                        <!--<path d="M60 10  L10 10 L10 60 M 40 20 L 20 20 L 20 40" style="stroke:black;stroke-width:3px;stroke-dasharray: 2" fill="white"></path>-->
+
+                        <!---->
+
+
+                    <!--</svg>-->
                 <!--</canvas>-->
             </div>
             <div id="viz" class="row"></div>
             <!--<div id="find" class="find"></div>-->
         </div>
-        <div class="col-md-2 " style="padding-top: 10px;padding-left:4px;padding-right: 4px;background-color: #737373;height: 100vh">
+        <div class="col-md-2 " style="padding-top: 10px;padding-left:4px;padding-right: 4px;background-color: #737373;height: 100vh;overflow: hidden">
             <ul class="nav nav-pills  nav-justified bg-light" >
                 <li class="active nav-item " ><a data-toggle="tab" href="#menu1" style="color: white;">查询</a></li>
                 <li class="nav-item"> <a data-toggle="tab" href="#menu2" id="static">统计</a></li>
@@ -173,20 +182,20 @@
 
                     <!--<hr style="margin-top: 0px;margin-bottom: 0px">-->
 
-                    <button class="btn btn-block entityBtn1 entityBtn3"><img src="../../../module/open-iconic-master/png/caret-right.png">&nbsp;实体信息</button>
+                    <button class="btn btn-block entityBtn1 "><img src="../../../module/open-iconic-master/png/caret-right.png">&nbsp;实体信息</button>
                     <button class="btn btn-block entityBtn2 "> <img src="../../../module/open-iconic-master/png/caret-bottom.png">&nbsp;实体信息</button>
                     <!--<hr style="margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px">-->
-                    <div style="height: 20vh;overflow:scroll;margin-top: 10px ;" class="entityBtn2 entityBtn3" >
+                    <div style="height: 20vh;overflow:scroll;margin-top: 10px ;" class=" entityBtn3" >
                         <div id="dataArea">
                         </div>
                     </div>
 
                     <div style="margin-top: 5px"></div>
                     <!--<hr style="margin-top: 0px;margin-bottom: 0px;color: #0f0f0f">-->
-                    <button class="btn btn-block relationBtn1 relationBtn3"><img src="../../../module/open-iconic-master/png/caret-right.png">&nbsp;属性信息</button>
+                    <button class="btn btn-block relationBtn1 "><img src="../../../module/open-iconic-master/png/caret-right.png">&nbsp;属性信息</button>
                     <button class="btn btn-block relationBtn2"><img src="../../../module/open-iconic-master/png/caret-bottom.png">&nbsp;属性信息</button>
                     <!--<hr style="margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px;color: #0f0f0f">-->
-                    <div style="height: 30vh;overflow:scroll;" class="relationBtn2 relationBtn3"  >
+                    <div style="height: 30vh;overflow:scroll;" class=" relationBtn3"  >
                         <div id="dataArea2">
                         <!--<button class="btn btn-xs">市区</button>-->
                         </div>
@@ -207,24 +216,30 @@
 
 
     $(".entityBtn2").css("display","none");
+    $(".entityBtn3").css("display","none");
 
     $(".entityBtn1").click(function () {
         $(".entityBtn2").css("display","block");
+        $(".entityBtn3").css("display","block");
         $(".entityBtn1").css("display","none");
     })
     $(".entityBtn2").click(function () {
-        $(".entityBtn3").css("display","block");
+        $(".entityBtn3").css("display","none");
         $(".entityBtn2").css("display","none");
+        $(".entityBtn1").css("display","block");
     })
     $(".relationBtn2").css("display","none");
+    $(".relationBtn3").css("display","none");
 
     $(".relationBtn1").click(function () {
         $(".relationBtn2").css("display","block");
+        $(".relationBtn3").css("display","block");
         $(".relationBtn1").css("display","none");
     })
     $(".relationBtn2").click(function () {
-        $(".relationBtn3").css("display","block");
+        $(".relationBtn1").css("display","block");
         $(".relationBtn2").css("display","none");
+        $(".relationBtn3").css("display","none");
     })
 
     $("#reload").click(function () {
@@ -331,9 +346,80 @@
     })
     driver.close();
 
+    //
+    // var width =  document.body.clientWidth,
+    //     height = 500;
+    //
+    // var svg = d3.select("#mainshow").append("svg")
+    //     .attr("width", width)
+    //     .attr("height", height);
+    //
+    // // var rect1 = svg.append("rect")  //添加一个矩形
+    // //     .attr("x",width * 0.81)
+    // //     .attr("y",10)
+    // //     .attr("width",30)
+    // //     .attr("height",30)
+    // //     .
+    //
+    // // var rect2 = svg.append("rect")  //添加一个矩形
+    // //     .attr("x",width * 0.73)
+    // //     .attr("y",height * 0.42)
+    // //     .attr("z",1)
+    // //     .attr("width",30)
+    // //     .attr("height",150)
+    // //     .attr("fill","red")
+    //
+    // var text = svg.append("text")
+    //     .attr("x",20)
+    //     .attr("y",500)
+    //     .style({
+    //         fill: d3.rgb(0,0,0),
+    //         'font-size': '20px'
+    //     })
+    //     .text("TAX 1.0")
+
+
+
 </script>
 <script src="https://unpkg.com/neo4j-driver"></script>
 <!-- unpkg CDN minified for production use, version X.Y.Z -->
 <script src="https://unpkg.com/neo4j-driver@X.Y.Z/lib/browser/neo4j-web.min.js"></script>
+<!--<script src="../../manage/js/d3.min.js"></script>-->
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
 
+<script>
+    // var width =  document.body.clientWidth,
+    //     height = 1000;
+    //
+    // var svg = d3.select("#mainshow").append("svg")
+    //     .attr("width", width)
+    //     .attr("height", height);
+
+    // var rect1 = svg.append("rect")  //添加一个矩形
+    //     .attr("x",width * 0.81)
+    //     .attr("y",10)
+    //     .attr("width",30)
+    //     .attr("height",30)
+    //     .
+
+    // var rect2 = svg.append("rect")  //添加一个矩形
+    //     .attr("x",width * 0.73)
+    //     .attr("y",height * 0.42)
+    //     .attr("z",1)
+    //     .attr("width",30)
+    //     .attr("height",150)
+    //     .attr("fill","red")
+
+    // var text = svg.append("text")
+    //     .attr("x",20)
+    //     .attr("y",20)
+    //     .style({
+    //         fill: d3.rgb(0,0,0),
+    //         'font-size': '20px'
+    //     })
+    //     .text("TAX 1.0")
+
+
+
+</script>
 </html>

@@ -1,22 +1,7 @@
 {
   "name": "税收",
   "children": [
-    {
-      "name": "流转税",
-      "children": [
-        {
-          "name": "增值税",
-          "children": [
-            {"name": "生产型增值税", "value": 3938},
-            {"name": "消费性增值税", "value": 3812},
-            {"name": "收入型增值税", "value": 6714}
-          ]
-        },
-        {
-          "name": "消费税"
-        }
-        ]
-    },
+
     {
       "name": "所得税",
       "children": [
@@ -56,6 +41,22 @@
         {"name": "黑色金属矿原矿", "value": 4116},
         {"name": "有色金属矿原矿", "value": 4116},
         {"name": "盐", "value": 4116}
+      ]
+    },
+    {
+      "name": "流转税",
+      "children": [
+        {
+          "name": "增值税",
+          "children": [
+            {"name": "生产型增值税", "value": 3938},
+            {"name": "消费性增值税", "value": 3812},
+            {"name": "收入型增值税", "value": 6714}
+          ]
+        },
+        {
+          "name": "消费税"
+        }
       ]
     }
     ]
