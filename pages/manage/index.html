@@ -18,22 +18,28 @@
 
   <body>
   <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-    <!--<button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">-->
-      <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
-    <!--<a class="navbar-brand" href="#">Dashboard</a>-->
+
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="../../index.html">Home</a>
         </li>
+        <li class="nav-item dropdown active">
+          <a class="nav-link  dropdown-toggle" href="../build/index.html" id="navbarDropdown" role="button"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../build/step1/index.html">知识抽取</a>
+            <a class="dropdown-item" href="../build/step2/index2.html">知识融合</a>
+            <!--<div class="dropdown-divider"></div>-->
+            <a class="dropdown-item" href="../build/step3/index3.html">知识加工</a>
+          </div>
+        </li>
+
         <li class="nav-item ">
-          <a class="nav-link" href="../build/index.html">Build</a>
+          <a class="nav-link" href="../manage/index.html">Manage</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Manage</a>
-        </li>
+
       </ul>
     </div>
   </nav>

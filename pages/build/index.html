@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -15,89 +15,104 @@
     <!-- Custom styles for this template -->
     <link href="dependences/css/jumbotron.css" rel="stylesheet">
 
+    <style>
+        .dropdown-menu {
+            min-width: 0px;
+        }
+    </style>
 
-  </head>
+</head>
 
 
-  <body>
-  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-    <!--<button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">-->
-      <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
-    <!--<a class="navbar-brand" href="#">Dashboard</a>-->
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../../index.html">Home</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="../build/index.html">Build</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="../manage/index.html">Manage</a>
-        </li>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="../build/index.html">概况</a>
+                    <a class="dropdown-item" href="../build/step1/index.html">知识抽取</a>
+                    <a class="dropdown-item" href="../build/step2/index2.html">知识融合</a>
+                    <!--<div class="dropdown-divider"></div>-->
+                    <a class="dropdown-item" href="../build/step3/index3.html">知识加工</a>
+                </div>
+            </li>
 
-      </ul>
+            <li class="nav-item ">
+                <a class="nav-link" href="../manage/index.html">Manage</a>
+            </li>
+
+        </ul>
     </div>
-  </nav>
+</nav>
 
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="padding: 0px">
-      <div class="container">
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" style="padding: 0px">
+    <div class="container">
         <!--<h1 class="display-3">Build A Tax Knowledge Graph .</h1>-->
         <!--<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.-->
         <!---->
         <!--</p>-->
         <iframe src="iframe.html" style="width: 100%;height:50vh;border: 0px"></iframe>
         <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
-      </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h3>1.知识提取</h3>
+            <p>
+                从各种类型的数据源中提取出实体、属性以及实体间的相互关系，在此基础上形成本体化的知识表达；
+            <p>
+                <a class="btn btn-secondary" href="step1/index.html" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h3>2.知识融合</h3>
+            <p>
+                在获得新知识之后，需要对其进行整合，以消除矛盾和歧义，比如某些实体可能有多种表达，某个特定称谓也许对应于多个不同的实体等；
+            </p>
+            <p><a class="btn btn-secondary" href="step2/index2.html" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h3>3.知识加工</h3>
+            <p>对于经过融合的新知识，进行甄别筛选，才能将合格的部分加入到知识库中，从而确保知识库的质量。
+            </p>
+
+            <p><a class="btn btn-secondary" href="step3/index3.html" role="button">View details &raquo;</a></p>
+        </div>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h3>1.知识提取</h3>
-          <p>
-            从各种类型的数据源中提取出实体、属性以及实体间的相互关系，在此基础上形成本体化的知识表达；
-          <p>
-          <a class="btn btn-secondary" href="step1/index.html" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h3>2.知识融合</h3>
-          <p>
-            在获得新知识之后，需要对其进行整合，以消除矛盾和歧义，比如某些实体可能有多种表达，某个特定称谓也许对应于多个不同的实体等；
-          </p>
-              <p><a class="btn btn-secondary" href="step2/index2.html" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h3>3.知识加工</h3>
-          <p>对于经过融合的新知识，进行甄别筛选，才能将合格的部分加入到知识库中，从而确保知识库的质量。
-          </p>
+    <!--<hr>-->
 
-          <p><a class="btn btn-secondary" href="step3/index3.html" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
-
-      <!--<hr>-->
-
-      <!--<footer>-->
-        <!--<p>&copy; Company 2017</p>-->
-      <!--</footer>-->
-    </div> <!-- /container -->
+    <!--<footer>-->
+    <!--<p>&copy; Company 2017</p>-->
+    <!--</footer>-->
+</div> <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../module/assets/js/vendor/jquery-slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../module/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
-    <script src="../../module/assets/js/vendor/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="../../module/dist/js/bootstrap.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../module/assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../module/assets/js/vendor/jquery-slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../module/assets/js/vendor/jquery.min.js"><\/script>')</script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
+<script src="../../module/assets/js/vendor/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="../../module/dist/js/bootstrap.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../module/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
 </html>

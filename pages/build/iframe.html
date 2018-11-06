@@ -48,19 +48,12 @@
 <script>
 
     var width =  document.body.clientWidth,
-        height = 300;
+        height = 400;
 
     var svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height);
 
-    svg.append('text').attr({
-        x: width*0.25,
-        y: height*0.47
-    }).style({
-        fill: d3.rgb(72,68,157),
-        'font-size': '50px'
-    }).text('TAX KNOWLEDGE GRAPH');
 
     var force = d3.layout.force()
         .gravity(.015)
@@ -109,5 +102,15 @@
             node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
         });
     });
+
+
+    svg.append('text').attr({
+        x: width*0.25,
+        y: height*0.47
+    }).style({
+        fill: d3.rgb(72,68,157),
+        'font-size': '50px'
+    }).text('TAX KNOWLEDGE GRAPH');
+
 
 </script>

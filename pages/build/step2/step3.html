@@ -18,11 +18,13 @@
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 
-    <div id="main" style="width: 98%;height:88vh;"></div>
+    <div id="main" style="width: 98%;height:80vh;"></div>
 
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
+    var bigsize = 60;
+    var size = 30;
     option = {
         "tooltip": {
             "formatter": function(param) {
@@ -36,17 +38,26 @@
             "text": ""
         },
         "legend": [{
-            "data": ["Quora stackoverflow","百度词条", "Wiki data" , "Taxer"]
+            "data": [ "Taxer","Quora stackoverflow","百度词条", "Wiki data" ],
+            selected: {
+                'Taxer': true,
+                'Quora stackoverflow': false,
+                '百度词条': false,
+                'Wiki data': false
+            }
         }],
         "series": [{
             "top": 150,
+            "color":['#d48265','#2f4554', '#61a0a8', '#c23531', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
             "label": {
                 "normal": {
                     "show": true,
                     "position": "inside",
                     "textStyle": {
-                        "fontSize": 18
-                    }
+                        "fontSize": 16
+                    },
+                    "fontStyle": 600,
+                    "formatter": '{b}'
                 }
             },
             "roam": true,
@@ -65,47 +76,58 @@
             "data": [{
                 "name": "税务(tax)",
                 "draggable": true,
-                "category": "主体"
+                "category": "主体",
+                "symbolSize": bigsize,
             }, {
                 "name": "课税对象",
                 "draggable": true,
-                "category": "Quora stackoverflow"
+                "category": "Quora stackoverflow",
+                "symbolSize": size,
             }, {
                 "name": "税收收入",
                 "draggable": true,
-                "category": "Quora stackoverflow"
+                "category": "Quora stackoverflow",
+                "symbolSize": size,
             }, {
                 "name": "征收管理",
                 "draggable": true,
-                "category": "Wiki data"
+                "category": "Wiki data",
+                "symbolSize": size,
             }, {
                 "name": "税率",
                 "draggable": true,
-                "category": "Wiki data"
+                "category": "Wiki data",
+                "symbolSize": size,
             },{
                 "name": "增值税",
                 "draggable": true,
-                "category": "百度词条"
+                "category": "百度词条",
+                "symbolSize": size,
             },{
                 "name": "消费税",
                 "draggable": true,
-                "category": "百度词条"
+                "category": "百度词条",
+                "symbolSize": size,
             },{
                 "name": "重大违法信息",
                 "draggable": true,
-                "category": "Taxer"
+                "category": "Taxer",
+                "symbolSize": size,
             }, {
                 "name": "应纳销售收入",
                 "draggable": true,
-                "category": "Taxer"
+                "category": "Taxer",
+                "symbolSize": size,
             },   {
                 "name": "流转税",
                 "draggable": true,
-                "category": "百度词条"
+                "category": "百度词条",
+                "symbolSize": size,
             },  {
                 "name": "所属日期止",
                 "draggable": true,
-                "category": "Taxer"
+                "category": "Taxer",
+                "symbolSize": size,
             },
                 // {
                 //     "name": "张三",
@@ -135,10 +157,9 @@
             "focusNodeAdjacency": true,
             "force": {
                 "repulsion": 600,
-                "edgeLength": [150, 300]
+                "edgeLength": [100, 200]
             },
             "layout": "force",
-            "symbolSize": [240, 30],
             "links": [{
                 "target": "所属日期起",
                 "source": "税务(tax)",
@@ -185,17 +206,19 @@
                     "source": "税务(tax)",
                     "category": "Taxer"
                 }, ],
-            "symbol": "path://M19.300,3.300 L253.300,3.300 C262.136,3.300 269.300,10.463 269.300,19.300 L269.300,21.300 C269.300,30.137 262.136,37.300 253.300,37.300 L19.300,37.300 C10.463,37.300 3.300,30.137 3.300,21.300 L3.300,19.300 C3.300,10.463 10.463,3.300 19.300,3.300 Z",
+            "symbol": 'circle',
             "lineStyle": {
                 "normal": {
                     "opacity": 0.9,
-                    "width": 1,
-                    "curveness": 0.1
+                    "width": 6,
+                    "curveness": 0,
+                    "type":"solid"
                 }
             }
         }],
-        "animationEasingUpdate": "quinticInOut",
-        "animationDurationUpdate": 1500
+        backgroundColor: 'white',
+        animationDuration: 1000,
+        animationEasingUpdate: 'quinticInOut',
     };
     myChart.setOption(option);
 
