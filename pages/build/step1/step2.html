@@ -2,38 +2,275 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>step1</title>
+    <title>step2</title>
     <script src="../../../module/assets/js/vendor/jquery.min.js"></script>
-    <script src="../../../module/assets/js/vendor/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../../../module/assets/js/vendor/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
 
     <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../../module/dist/js/bootstrap.js"></script>
-    <!--<script src="../../../module/assets/js/vendor/jquery.min.js"></script>-->
     <script src="./echarts/echarts.min.js"></script>
     <script src="./echarts/echarts-wordcloud.min.js"></script>
 
 
-
 </head>
 <body>
-<div class="row" style="width: 98%">
 
-</div>
+<div id="echarts" style="height: 500px;width: 100%"></div>
+
 </body>
 <script>
     var myChart = echarts.init(document.getElementById('echarts'));
+    let nameData = [];
+    let timeData = [];
+    let contentData = [];
+    let listData = [];
 
+    var legendes1 = ["基本数据", "税收数据", "欠税信息", "行政处罚信息", "重大违法信息", "增值税申报信息", "缴税情况", "税务信用评级", "所得税年度汇算清缴", "企业"];
+    var legendes2 = ["企业", "基本数据", "税收数据", "欠税信息", "行政处罚信息", "重大违法信息", "增值税申报信息", "缴税情况", "税务信用评级", "所得税年度汇算清缴"];
 
+    let len = 11;
+    for (let i = 1; i < len; i++) {
+        nameData.push({
+            name: legendes1[i - 1],
+            value: 4
+        });
+        timeData.push({
+            name: legendes2[i - 1],
+            value: 4
+        });
+        contentData.push({
+            name: "关系" + i,
+            value: 11
+        });
+        listData.push({
+            name: i + '',
+            value: 1
+        });
+    }
+    option = {
+        backgroundColor: "#FFFFFF",
+
+        grid: {
+            top: '-2%',
+            left: '0%',
+            right: '0%',
+            bottom: '-5%',
+            containLabel: true
+        },
+        xAxis: {
+            show: false,
+            type: 'value'
+        },
+        yAxis: [{
+            type: 'category',
+            position: 'right',
+            inverse: true,
+            axisLine: {position: 'right'},
+            show: false,
+            data: ['', '', '', '', '', '', '', '', '', '', '']
+        }],
+        series: [{
+            // name: '列表序列号',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideLeft',
+                    formatter: function (e) {
+                        if (e.name === '') {
+                            return '';
+                        }
+                        return '{cirle|' + e.name + '}';
+                    },
+                    rich: {
+                        cirle: {
+                            width: 20,
+                            height: 20,
+                            borderRadius: 10,
+                            color: "#000",
+                            align: "center",
+                            borderColor: "#F7F7F7",
+                            borderWidth: 1,
+                            backgroundColor: "#F7F7F7"
+                        }
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: "#F7F7F7"
+                }
+            },
+            data: [{
+                name: '', value: 1, itemStyle: {
+                    normal: {
+                        color: "#fff"
+                    }
+                }
+            }].concat(listData.slice(0, 10))
+        }, {
+            // name: '列表名',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'inside',
+                    formatter: function (e) {
+// console.log(e);
+                        return '{cirle|' + e.name + '}';
+                    },
+                    rich: {
+                        cirle: {
+                            color: "#000",
+
+                        }
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: "#F7F7F7"
+                }
+            },
+            data: ([{
+                name: "实体", value: 4, itemStyle: {
+                    normal: {
+                        color: "#fff"
+                    }
+                },
+            }]).concat(nameData.slice(0, 10))
+        }, {
+            // name: '时长',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'inside',
+                    formatter: function (e) {
+// console.log(e);
+                        return '{cirle|' + e.name + '}';
+                    },
+                    rich: {
+                        cirle: {
+                            color: "#000",
+// width:100,
+// height:40,
+// backgroundColor:"red",
+// align:"center",
+                        }
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: "#F7F7F7"
+                }
+            },
+            data: ([{
+                name: "实体", value: 4, itemStyle: {
+                    normal: {
+                        color: "#fff"
+                    }
+                },
+            }]).concat(timeData.slice(0, 10))
+        }, {
+            name: '列表内容',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'inside',
+                    formatter: function (e) {
+// console.log(e);
+                        let len = e.name.length;
+                        if (len > 40) {
+                            e.name = e.name.substring(0, 40) + "\n" + e.name.substring(40, len);
+                        }
+                        return '{cirle|' + e.name + '}';
+                    },
+                    rich: {
+                        cirle: {
+                            color: "#000",
+                            width: 100,
+// height:40,
+// backgroundColor:"red",
+                            align: "center",
+                        }
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: "#F7F7F7"
+                }
+            },
+            data: ([{
+                name: "抽取实体间的关系", value: 11, itemStyle: {
+                    normal: {
+                        color: "#fff"
+                    }
+                },
+            }]).concat(contentData.slice(0, 10))
+        }]
+    };
+    myChart.setOption(option);
+    clearInterval(timeTicket);
+    let count1 = 0;
+    let count2 = 10;
+    var timeTicket = setInterval(function () {
+        count1++;
+        count2++;
+        count1 = count1 > (len - 11) ? 0 : count1;
+        count2 = count2 > (len - 1) ? 10 : count2;
+        option.series[0].data = ([{
+            name: "", value: 1, itemStyle: {
+                normal: {
+                    color: "#fff"
+                }
+            },
+        }]).concat(listData.slice(count1, count2));
+        option.series[1].data = ([{
+            name: "实体", value: 4, itemStyle: {
+                normal: {
+                    color: "#fff"
+                }
+            },
+        }]).concat(nameData.slice(count1, count2));
+        option.series[2].data = ([{
+            name: "实体", value: 4, itemStyle: {
+                normal: {
+                    color: "#fff"
+                }
+            },
+        }]).concat(timeData.slice(count1, count2));
+        option.series[3].data = ([{
+            name: "抽取实体间的关系", value: 11, itemStyle: {
+                normal: {
+                    color: "#fff"
+                }
+            },
+        }]).concat(contentData.slice(count1, count2));
+        myChart.setOption(option);
+    }, 1000);
+    //qiyeend
 
 
     //myChart.setOption(option);
-    myChart.on('click', function (params) {
-        //alert((params.name));
-        window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
-
-    });
+    // myChart.on('click', function (params) {
+    //     //alert((params.name));
+    //     window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+    //
+    // });
     myChart.setOption(option)
 
+    /*http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js 使用这个脚本才可定义字符颜色*/
+    /*http://echarts.baidu.com/christmas/echarts-wordcloud.min.js 无法定义字符颜色*/
 
 </script>
 </html>

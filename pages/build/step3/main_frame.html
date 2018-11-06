@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>step</title>
     <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../steps/jquery-1.10.2.min.js"></script>
+    <script src="../dependences/jquery-1.10.2.min.js"></script>
     <script src="../../../module/assets/js/vendor/tether.min.js"
             integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
             crossorigin="anonymous"></script>
@@ -25,14 +25,8 @@
 <!--<div class="row container">-->
     <div class="col-lg-3" style="overflow: hidden;position: fixed" id="myStep">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width: 90%;height:90vh">
-            <desc>Example script01 - invoke an ECMAScript function from an onclick event
-            </desc>
 
-            <!--<defs>  -->
-                <!--   <marker id="markerArrow" markerWidth="8" markerHeight="8" refx="2" refy="5" orient="auto">  -->
-                    <!--       <path d="M2,3 L2,7 L4,5 L2,3" style="fill: rgb(72, 68, 157);" />  -->
-                    <!--   </marker>  -->
-            <!--</defs>  -->
+
 
             <line x1="50%" y1="10%" x2="50%" y2="10%" style="stroke:white;"  id="1" stroke-width="4" />
             <g>
@@ -125,6 +119,15 @@
 
             </script>
         </svg>
+
+        <div>
+            <button class="btn btn-light" id ="perv">
+                上一步
+            </button>
+            <button class="btn"  disabled="disabled" style="margin-left: 80px" id ="next">
+                下一步
+            </button>
+        </div>
     </div>
     <div class="col-lg-9 offset-3" style="overflow-y:hidden;padding-top: 20px">
 
@@ -221,7 +224,12 @@
 <!--</script>-->
 
 <script>
-    // $.getJSON("json/",function(data)
+    // $("#next").click(function(){
+    //     window.location="../step3/main_frame.html";
+    // })
+    $("#perv").click(function(){
+        window.location="../step2/index_step.html";
+    })
 </script>
 
 

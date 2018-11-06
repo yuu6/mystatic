@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>知识融合</title>
+    <script src="../../../module/assets/js/vendor/jquery.min.js"></script>
+    <script src="../../../module/assets/js/vendor/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+    <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../module/dist/js/bootstrap.js"></script>
+    <!--<script src="../../../module/assets/js/vendor/jquery.min.js"></script>-->
+    <script src="../dependences/echarts/echarts.min.js"></script>
+</head>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;知识合并：将来自不同知识库的同一实体融合在一起
+</p>
+</br>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+    <div id="main" style="width: 98%;height:88vh;"></div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        "tooltip": {
+            "formatter": function(param) {
+                if (param.dataType === 'edge') {
+                    return param.data.category + ': ' + param.data.target;
+                }
+                return param.data.category + ': ' + param.data.name;
+            }
+        },
+        "title": {
+            "text": ""
+        },
+        "legend": [{
+            "data": ["Quora stackoverflow","百度词条", "Wiki data" , "Taxer"]
+        }],
+        "series": [{
+            "top": 150,
+            "label": {
+                "normal": {
+                    "show": true,
+                    "position": "inside",
+                    "textStyle": {
+                        "fontSize": 18
+                    }
+                }
+            },
+            "roam": true,
+            "edgeLabel": {
+                "normal": {
+                    "show": true,
+                    "formatter": function(param) {
+                        return param.data.category;
+                    },
+                    "textStyle": {
+                        "fontSize": 16
+                    }
+                }
+            },
+            "bottom": 80,
+            "data": [{
+                "name": "税务(tax)",
+                "draggable": true,
+                "category": "主体"
+            }, {
+                "name": "课税对象",
+                "draggable": true,
+                "category": "Quora stackoverflow"
+            }, {
+                "name": "税收收入",
+                "draggable": true,
+                "category": "Quora stackoverflow"
+            }, {
+                "name": "征收管理",
+                "draggable": true,
+                "category": "Wiki data"
+            }, {
+                "name": "税率",
+                "draggable": true,
+                "category": "Wiki data"
+            },{
+                "name": "增值税",
+                "draggable": true,
+                "category": "百度词条"
+            },{
+                "name": "消费税",
+                "draggable": true,
+                "category": "百度词条"
+            },{
+                "name": "重大违法信息",
+                "draggable": true,
+                "category": "Taxer"
+            }, {
+                "name": "应纳销售收入",
+                "draggable": true,
+                "category": "Taxer"
+            },   {
+                "name": "流转税",
+                "draggable": true,
+                "category": "百度词条"
+            },  {
+                "name": "所属日期止",
+                "draggable": true,
+                "category": "Taxer"
+            },
+                // {
+                //     "name": "张三",
+                //     "symbolSize": [150, 30],
+                //     "draggable": true,
+                //     "label": {
+                //         "normal": {
+                //             "textBorderWidth": 3,
+                //             "textBorderColor": 'blue',
+                //         }
+                //     },
+                //     "category": "法人代表"
+                // }
+            ],
+            "categories": [{
+                "name": "百度词条"
+            }, {
+                "name": "Wiki data"
+            }, {
+                "name": "Quora stackoverflow"
+            }, {
+                "name": "Taxer"
+            },{
+                "name": "主体"
+            } ],
+            "type": "graph",
+            "focusNodeAdjacency": true,
+            "force": {
+                "repulsion": 600,
+                "edgeLength": [150, 300]
+            },
+            "layout": "force",
+            "symbolSize": [240, 30],
+            "links": [{
+                "target": "所属日期起",
+                "source": "税务(tax)",
+                "category": "Taxer"
+            },
+                {
+                    "target": "征收管理",
+                    "source": "税务(tax)",
+                    "category": "Wiki data"
+                },{
+                    "target": "税率",
+                    "source": "税务(tax)",
+                    "category": "Wiki data"
+                },{
+                    "target": "课税对象",
+                    "source": "税务(tax)",
+                    "category": "Quora stackoverflow"
+                },{
+                    "target": "税收收入",
+                    "source": "税务(tax)",
+                    "category": "Quora stackoverflow"
+                },{
+                    "target": "重大违法信息",
+                    "source": "税务(tax)",
+                    "category": "Taxer"
+                }, {
+                    "target": "应纳销售收入",
+                    "source": "税务(tax)",
+                    "category": "Taxer"
+                }, {
+                    "target": "增值税",
+                    "source": "税务(tax)",
+                    "category": "百度词条"
+                },{
+                    "target": "消费税",
+                    "source": "税务(tax)",
+                    "category": "百度词条"
+                }, {
+                    "target": "流转税",
+                    "source": "税务(tax)",
+                    "category": "百度词条"
+                }, {
+                    "target": "所属日期止",
+                    "source": "税务(tax)",
+                    "category": "Taxer"
+                }, ],
+            "symbol": "path://M19.300,3.300 L253.300,3.300 C262.136,3.300 269.300,10.463 269.300,19.300 L269.300,21.300 C269.300,30.137 262.136,37.300 253.300,37.300 L19.300,37.300 C10.463,37.300 3.300,30.137 3.300,21.300 L3.300,19.300 C3.300,10.463 10.463,3.300 19.300,3.300 Z",
+            "lineStyle": {
+                "normal": {
+                    "opacity": 0.9,
+                    "width": 1,
+                    "curveness": 0.1
+                }
+            }
+        }],
+        "animationEasingUpdate": "quinticInOut",
+        "animationDurationUpdate": 1500
+    };
+    myChart.setOption(option);
+
+</script>
+
+</body>
+</html>

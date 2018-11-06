@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>知识融合</title>
+    <script src="../../../module/assets/js/vendor/jquery.min.js"></script>
+    <script src="../../../module/assets/js/vendor/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+
+    <link href="../../../module/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../module/dist/js/bootstrap.js"></script>
+    <!--<script src="../../../module/assets/js/vendor/jquery.min.js"></script>-->
+    <script src="./../dependences/echarts/echarts.min.js"></script>
+</head>
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一个命名实体的指称项可以对应多个实体概念，消歧需要把具有歧义的指称项映射到它实际所指实体的概念上</p>
+</br>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+<div id="main" style="width: 98%;height:80vh;"></div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var size = 60;
+    var size1 = 30;
+    var yy = 200;
+    var yy1 = 250;
+
+    var data1 = [{
+        "name": "税务",
+        x: 10,
+        y: yy1,
+        "symbolSize": size,
+        "category": "1",
+        "draggable": "true"
+    }, {
+        "name": "税收事务工作",
+        x: 20,
+        y: yy,
+        "symbolSize": size,
+        "category": "1",
+        "draggable": "true"
+    }, {
+        x: 30,
+        y: yy1,
+        "name": "所属日期起",
+        "symbolSize": size1,
+        "category": "1",
+        "draggable": "true"
+    }, {
+        x: 40,
+        y: yy,
+        "name": "应税销售收入",
+        "symbolSize": size1,
+        "category": "1",
+        "draggable": "true",
+        "value": 1
+    }, {
+        x: 50,
+        y: yy1,
+        "name": "所属日期止",
+        "symbolSize": size1,
+        "category": "1",
+        "draggable": "true"
+    }, {
+        x: 170,
+        y: yy1,
+        "name": "重大违法信息",
+        "symbolSize": size,
+        "category": "重大违法信息",
+        "draggable": "true"
+    }];
+    var data2 = [{
+        "name": "税务",
+        x: 10,
+        y: yy1,
+        "symbolSize": size,
+        "category": "1",
+        "draggable": "true"
+    }, {
+        x: 30,
+        y: yy1,
+        "name": "所属日期起",
+        "symbolSize": size1,
+        "category": "1",
+        "draggable": "true"
+    }, {
+        x: 40,
+        y: yy,
+        "name": "应税销售收入",
+        "symbolSize": size1,
+        "category": "1",
+        "draggable": "true",
+        "value": 1
+    }, {
+        x: 50,
+        y: yy1,
+        "name": "所属日期止",
+        "symbolSize": size1,
+        "category": "1",
+        "draggable": "true"
+    },  {
+        x: 170,
+        y: yy1,
+        "name": "重大违法信息",
+        "symbolSize": size,
+        "category": "重大违法信息",
+        "draggable": "true"
+    }];
+
+    var link1 = [{
+        "source": "税收事务工作",
+        "target": "入库税额"
+    }, {
+        "source": "税务",
+        "target": "应税销售收入"
+    }, {
+        "source": "税务",
+        "target": "所属日期起"
+    }, {
+        "source": "税务",
+        "target": "所属日期止"
+    }, {
+        "source": "重大违法信息",
+        "target": "税收事务工作"
+    }
+    ];
+
+    var link2 = [{
+        "source": "税收事务工作",
+        "target": "入库税额"
+    }, {
+        "source": "税务",
+        "target": "应税销售收入"
+    }, {
+        "source": "税务",
+        "target": "所属日期起"
+    }, {
+        "source": "税务",
+        "target": "所属日期止"
+    }, {
+        "source": "重大违法信息",
+        "target": "税务"
+    }
+    ];
+
+    var catagory = [{
+        'name': '税收'
+    }, {
+        'name': '所属日期止'
+    }, {
+        'name': '欠税信息'
+    }, {
+        'name': '企业'
+    }, {
+        'name': '行政处罚信息'
+    }, {
+        'name': '重大违法信息'
+    }, {
+        'name': '缴税情况'
+    }, {
+        'name': '增值税申报信息'
+    }]
+    xuanran(data1, link1, catagory);
+
+    function xuanran(mydata, mylink, mycatagory) {
+        option = {
+            title: {
+                text: "实体链接",
+                top: "top",
+                left: "left",
+                textStyle: {
+                    color: '#f7f7f7'
+                }
+            },
+            tooltip: {
+                formatter: '{b}'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mytool12: {
+                        show: true,
+                        type: "circle",
+                        title: '还原',
+                        icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                        onclick: function () {
+                            myChart.clear();
+                            xuanran(data1, link1, catagory)
+                        }
+                    },
+                    mytool1: {
+                        show: true,
+                        type: "circle",
+                        icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                        onclick: function () {
+                            myChart.clear();
+                            xuanran(data2, link2, catagory)
+                        }
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+
+                }
+            },
+            backgroundColor: 'white',
+            animationDuration: 1000,
+            animationEasingUpdate: 'quinticInOut',
+            series: [{
+                name: '知识体系',
+                type: 'graph',
+                layout: 'force',
+                force: {
+                    repulsion: 40,
+                    gravity: 0.1,
+                    edgeLength: 30,
+                    layoutAnimation: true,
+                },
+                data: mydata,
+                links: mylink,
+                categories: mycatagory,
+                roam: false,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside',
+                        formatter: '{b}',
+                        fontSize: 16,
+                        fontStyle: '600',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 6,
+                        color: 'source',
+                        curveness: 0,
+                        type: "solid"
+                    }
+                }
+            }]
+        };
+        myChart.setOption(option)
+    }
+
+
+</script>
+
+</body>
+</html>
